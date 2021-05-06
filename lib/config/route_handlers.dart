@@ -9,7 +9,7 @@ import '../view/home/home.dart';
 // token验证
 _routerBefore(BuildContext context, Widget route) {
   final String _token = ""; //token
-  bool _isOpenVerify = true; //是否开启验证
+  bool _isOpenVerify = false; //是否开启验证
   if (_token.isNotEmpty || !_isOpenVerify) {
     return route;
   } else {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/routes.dart';
 
@@ -10,7 +10,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   void _toIndexPage() {
-    // Fluttertoast.showToast(msg: "msg");
+    Fluttertoast.showToast(msg: "msg",gravity: ToastGravity.CENTER);
     Routes.router.navigateTo(context, '/index');
   }
 
