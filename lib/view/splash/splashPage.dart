@@ -16,6 +16,7 @@ class _SplashPageState extends State<SplashPage> {
   int _countDown = 5; //倒计时间
   Timer _timer; //计时器
   bool _isShow = false; //闪屏页是否加载完成
+  // 监听网络图片是否加载完成
   ImageProvider _addImageLoadListener(String url) {
     Image image = Image.network(url);
     image.image
@@ -25,6 +26,7 @@ class _SplashPageState extends State<SplashPage> {
             setState(() {
               _isShow = true;
             });
+            //图片加载完成倒计时跳转开启 
             _timer = Timer.periodic(Duration(seconds: 1), (_timer) {
               setState(() {
                 _countDown--;
@@ -51,11 +53,13 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void initState() {
+    //手机状态栏，下方按钮视图设置
     SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
   }
 
   void dispose() {
+    //手机状态栏，下方按钮视图设置
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     _timer?.cancel();
     _timer = null;

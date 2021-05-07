@@ -6,7 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/indexCubit.dart';
 import '../../cubit/homeCubit.dart';
 // import '../../config/routes.dart';
-import '../../utils/httpRequest.dart';
+// import '../../utils/httpRequest.dart';
+
+import '../../utils/eventBus.dart';
+import '../../event/demoEvent.dart';
 
 class IndexPage extends StatefulWidget {
   @override
@@ -15,21 +18,31 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   void _login() async {
-    try {
-      final data = await HttpUtils.post(url:"/cs/public/index.php/test");
-      print(data['count']);
-    } catch (err) {
-      print(err);
-    }
-
+    // try {
+    //   final data = await HttpUtils.post(url:"/cs/public/index.php/test");
+    //   print(data['count']);
+    // } catch (err) {
+    //   print(err);
+    // }
+    eventBus.fire(DemoEvent(true)); //eventBus触发事件
     // print("login");
     // Routes.router.navigateTo(context, '/home');
+  }
+
+  void initState() {
+    // eventBus监听事件
+    eventBus.on<DemoEvent>().listen((event) {
+      print(event.isClick);
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<IndexCubit, int>(
+      //状态管理-获取状态
       builder: (context, indexCount) {
+        //多个状态-嵌套模式
         return BlocBuilder<HomeCubit, int>(builder: (context, homeCount) {
           return Scaffold(
             appBar: AppBar(
