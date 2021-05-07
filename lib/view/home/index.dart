@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubit/indexCubit.dart';
 import '../../cubit/homeCubit.dart';
-import '../../config/routes.dart';
+// import '../../config/routes.dart';
+import '../../utils/httpRequest.dart';
 
 class IndexPage extends StatefulWidget {
   @override
@@ -13,9 +14,16 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
-  void _login() {
-    print("login");
-    Routes.router.navigateTo(context, '/home');
+  void _login() async {
+    try {
+      final data = await HttpUtils.post(url:"/cs/public/index.php/test");
+      print(data['count']);
+    } catch (err) {
+      print(err);
+    }
+
+    // print("login");
+    // Routes.router.navigateTo(context, '/home');
   }
 
   @override
